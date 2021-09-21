@@ -37,6 +37,28 @@
         <item name="android:textSize">@dimen/regular_text</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:fontFamily">@font/light</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name = "smallText" parent="text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/smallText</item>
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name = "infoText" parent="text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+    </style>
+
+    <style name = "infoHighLightText" parent="text">
+        <item name="android:layout_marginBottom">12dp</item>
     </style>
 
     <style name = "textField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -55,19 +77,38 @@
     </style>
 
 
-    <style name = "smallText" parent="text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/smallText</item>
-        <item name="android:textSize">@dimen/small_text</item>
-        <item name="android:fontFamily">@font/light</item>
-    </style>
-
     <style name = "card">
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="cornerRadius">3dp</item>
+        <item name="contentPadding">24dp</item>
         <item name="cardBackgroundColor">@color/card</item>
+    </style>
+
+
+    <style name = "cardContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+    <style name = "infoLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name = "icon">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:padding">8dp</item>
     </style>
 
 </resources>
