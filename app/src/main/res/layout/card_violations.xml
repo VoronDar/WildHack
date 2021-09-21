@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView style="@style/card"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        style="@style/cardContent">
+        <TextView
+            style="@style/infoHighLightText"
+            android:text = "Статистика нарушений по СИЗ"
+            />
+
+        <LinearLayout
+            style="@style/infoLayout">
+            <ImageView
+                style="@style/icon"
+                android:src="@drawable/ic_mask"
+                />
+            <TextView
+                style="@style/infoText"
+                android:text = "Маски"
+                />
+            <TextView
+                android:id = "@+id/masks_count"
+                style="@style/smallText"
+                android:text = "123"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/infoLayout">
+            <ImageView
+                style="@style/icon"
+                android:src="@drawable/ic_helmet"
+                />
+            <TextView
+                style="@style/infoText"
+                android:text = "Каски"
+                />
+            <TextView
+                android:id = "@+id/helmets_count"
+                style="@style/smallText"
+                android:text = "123"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/infoLayout">
+            <ImageView
+                style="@style/icon"
+                android:src="@drawable/ic_shirt"
+                />
+            <TextView
+                style="@style/infoText"
+                android:text = "Жилеты"
+                />
+            <TextView
+                android:id = "@+id/shirts_count"
+                style="@style/smallText"
+                android:text = "123"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/infoLayout">
+            <ImageView
+                style="@style/icon"
+                android:src="@drawable/ic_distance"
+                />
+            <TextView
+                style="@style/infoText"
+                android:text = "Соц. дистанция"
+                />
+            <TextView
+                android:id = "@+id/distance_count"
+                style="@style/smallText"
+                android:text = "23123"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
