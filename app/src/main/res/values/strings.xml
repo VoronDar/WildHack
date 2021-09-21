@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">ThisApp</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="enter">Вход</string>
+    <string name="auth">Аутентификация</string>
+    <string name="threads_title">Состояние обработки потоков</string>
+    <string name="cam_first">Камера № 1\n(МКИИТ)</string>
+    <string name="cam_third">Камера № 3\n(МКИИТ)</string>
+    <string name="cam_fourth">Камера № 4\n(МКИИТ)</string>
+    <string name="violations_title">Статистика нарушений по СИЗ</string>
+    <string name="masks">Маски</string>
+    <string name="helmets">Каски</string>
+    <string name="shirts">Жилеты</string>
+    <string name="social_distance">Соц. дистанция</string>
 </resources>

@@ -7,19 +7,19 @@
         style="@style/cardContent">
         <TextView
             style="@style/infoHighLightText"
-            android:text = "Состояние обработки потоков"
+            android:text = "@string/threads_title"
             />
 
         <LinearLayout
             style="@style/infoLayout">
             <TextView
                 style="@style/infoText"
-                android:text = "Камера № 1\n(МКИИТ)"
+                android:text = "@string/cam_first"
                 />
             <ImageView
                 android:id = "@+id/cam_state_1"
                 style="@style/icon"
-                android:src="@drawable/ic_mask"
+                android:src="@drawable/state_ok"
                 />
         </LinearLayout>
 
@@ -27,12 +27,12 @@
             style="@style/infoLayout">
             <TextView
                 style="@style/infoText"
-                android:text = "Камера № 3\n(МКИИТ)"
+                android:text = "@string/cam_third"
                 />
             <ImageView
                 android:id = "@+id/cam_state_3"
                 style="@style/icon"
-                android:src="@drawable/ic_mask"
+                android:src="@drawable/state_warning"
                 />
         </LinearLayout>
 
@@ -40,12 +40,12 @@
             style="@style/infoLayout">
             <TextView
                 style="@style/infoText"
-                android:text = "Камера № 4\n(МКИИТ)"
+                android:text = "@string/cam_fourth"
                 />
             <ImageView
                 android:id = "@+id/cam_state_4"
                 style="@style/icon"
-                android:src="@drawable/ic_mask"
+                android:src="@drawable/state_error"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -7,7 +7,7 @@
         style="@style/cardContent">
         <TextView
             style="@style/infoHighLightText"
-            android:text = "Статистика нарушений по СИЗ"
+            android:text = "@string/violations_title"
             />
 
         <LinearLayout
@@ -18,7 +18,7 @@
                 />
             <TextView
                 style="@style/infoText"
-                android:text = "Маски"
+                android:text = "@string/masks"
                 />
             <TextView
                 android:id = "@+id/masks_count"
@@ -35,7 +35,7 @@
                 />
             <TextView
                 style="@style/infoText"
-                android:text = "Каски"
+                android:text = "@string/helmets"
                 />
             <TextView
                 android:id = "@+id/helmets_count"
@@ -52,7 +52,7 @@
                 />
             <TextView
                 style="@style/infoText"
-                android:text = "Жилеты"
+                android:text = "@string/shirts"
                 />
             <TextView
                 android:id = "@+id/shirts_count"
@@ -69,7 +69,7 @@
                 />
             <TextView
                 style="@style/infoText"
-                android:text = "Соц. дистанция"
+                android:text = "@string/social_distance"
                 />
             <TextView
                 android:id = "@+id/distance_count"

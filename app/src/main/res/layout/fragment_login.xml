@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    tools:context=".MainActivity">
+    <com.google.android.material.card.MaterialCardView
+        style="@style/card"
+        android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
+        >
+        <LinearLayout
+            style="@style/cardContent"
+            android:padding="24dp"
+            tools:ignore="RtlHardcoded">
+        <TextView
+            style="@style/infoHighLightText"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="24dp"
+            android:text = "@string/auth"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/textField"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/text"
+                android:layout_width="match_parent"
+                android:id = "@+id/login"
+                android:hint="@string/login"
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/textField"
+                app:endIconDrawable="@drawable/ic_show_password"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/icon"
+
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/text"
+                    android:layout_width="match_parent"
+                    android:id = "@+id/password"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                style="@style/mainButton"
+                android:layout_marginTop="16dp"
+                android:text = "@string/enter"
+                />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
