@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ThisApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.ThisApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -9,8 +9,65 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+
+        <item name="buttonStyle">@style/mainButton</item>
+        <item name="android:textViewStyle">@style/text</item>
+        <item name="cardViewStyle">@style/card</item>
     </style>
+
+
+    <style name = "mainButton"  parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:gravity">center</item>
+        <item name="backgroundTint">@color/button</item>
+        <item name="cornerRadius">3dp</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+
+    <style name = "text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/regular_text</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name = "textField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/regular_text</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="cornerRadius">3dp</item>
+        <item name="boxStrokeColor">@color/stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="android:background">@color/card</item>
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="hintTextColor">@color/hint</item>
+        <item name="android:fontFamily">@font/light</item>
+
+    </style>
+
+
+    <style name = "smallText" parent="text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/smallText</item>
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name = "card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">3dp</item>
+        <item name="cardBackgroundColor">@color/card</item>
+    </style>
+
 </resources>
