@@ -54,6 +54,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id = "@+id/enter"
                 style="@style/mainButton"
                 android:layout_marginTop="16dp"
                 android:text = "@string/enter"
