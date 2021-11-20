@@ -2,11 +2,15 @@ package com.astery.thisapp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.astery.thisapp.repository.Repository
-import com.astery.thisapp.ui.fragments.login.JobState
+import com.astery.thisapp.states.JFailure
+import com.astery.thisapp.states.JIdle
+import com.astery.thisapp.states.JRunning
+import com.astery.thisapp.states.JSuccess
 import com.astery.thisapp.ui.fragments.login.LoginViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.mockk
+import junit.framework.Assert.assertTrue
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.runBlocking
@@ -17,7 +21,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class TestLoginViewModel {
+class TestUsernameViewModel {
     private lateinit var repository: Repository
     private lateinit var viewModel: LoginViewModel
 
@@ -45,21 +49,21 @@ class TestLoginViewModel {
                 TestHelper.failureLogin(),
                 TestHelper.successPassword()
             )
-        } returns JobState.Failure
+        } returns JFailure(LoginViewModel.InvalidLoginInput.Username)
 
         coEvery {
             repository.auth(
                 TestHelper.failureLogin(),
                 TestHelper.failurePassword()
             )
-        } returns JobState.Failure
+        } returns JFailure(LoginViewModel.InvalidLoginInput.Both)
 
         coEvery {
             repository.auth(
                 TestHelper.successLogin(),
                 TestHelper.failurePassword()
             )
-        } returns JobState.Failure
+        } returns JFailure(LoginViewModel.InvalidLoginInput.Password)
 
         // return success if each value is correct
         coEvery {
@@ -67,84 +71,103 @@ class TestLoginViewModel {
                 TestHelper.successLogin(),
                 TestHelper.successPassword()
             )
-        } returns JobState.Success
+        } returns JSuccess()
 
     }
 
     @Test
     fun checkInitialStateIsIdle() {
-        assertEquals(JobState.Idle, viewModel.loginState.value)
+        assertLoginStateIs<JIdle>()
     }
 
-
-    // TODO(it doesn't work, but I don't know what to do)
-    //@Test
+    @Test
     fun checkIsItRunningStateAfterAuth() = runBlocking {
         viewModel.auth()
         viewModel.loginState.observeForever {
-            when (it){
-                JobState.Idle -> {}
-                JobState.Running -> cancel()
-                else -> assertEquals(JobState.Running, viewModel.loginState.value)
+            when (it) {
+                is JIdle -> {
+                }
+                is JRunning -> cancel()
+                else -> assertLoginStateIs<JRunning>()
             }
         }
     }
 
     @Test
-    fun checkIsItMistakeStateWithAllInvalidData() = runBlocking {
-        viewModel.login.value = TestHelper.invalidLogin()
+    fun checkIsItInvalidInputStateWithAllInvalidData() = runBlocking {
+        viewModel.username.value = TestHelper.invalidLogin()
         viewModel.password.value = TestHelper.invalidPassword()
         viewModel.auth()
-        assertEquals(JobState.Mistake, viewModel.loginState.value)
+        assertEquals(JFailure(LoginViewModel.InvalidLoginInput.Both), viewModel.loginState.value)
     }
 
     @Test
-    fun checkIsItMistakeStateWithInvalidLogin() = runBlocking {
-        viewModel.login.value = TestHelper.invalidLogin()
+    fun checkIsItMistakeStateWithInvalidUsername() = runBlocking {
+        viewModel.username.value = TestHelper.invalidLogin()
         viewModel.password.value = TestHelper.successPassword()
         viewModel.auth()
-        assertEquals(JobState.Mistake, viewModel.loginState.value)
+        assertEquals(
+            JFailure(LoginViewModel.InvalidLoginInput.Username),
+            viewModel.loginState.value
+        )
     }
 
     @Test
     fun checkIsItMistakeStateWithAllInvalidPassword() = runBlocking {
-        viewModel.login.value = TestHelper.successLogin()
+        viewModel.username.value = TestHelper.successLogin()
         viewModel.password.value = TestHelper.invalidPassword()
         viewModel.auth()
-        assertEquals(JobState.Mistake, viewModel.loginState.value)
+        assertEquals(
+            JFailure(LoginViewModel.InvalidLoginInput.Password),
+            viewModel.loginState.value
+        )
     }
 
     @Test
     fun checkIsItSuccessWithCorrectData() = runBlocking {
-        viewModel.login.value = TestHelper.successLogin()
+        viewModel.username.value = TestHelper.successLogin()
         viewModel.password.value = TestHelper.successPassword()
         viewModel.auth()
-        assertEquals(JobState.Success, viewModel.loginState.value)
+        assertLoginStateIs<JSuccess>()
     }
 
 
     @Test
     fun checkIsItFailureWithFailurePassword() = runBlocking {
-        viewModel.login.value = TestHelper.successLogin()
+        viewModel.username.value = TestHelper.successLogin()
         viewModel.password.value = TestHelper.failurePassword()
         viewModel.auth()
-        assertEquals(JobState.Failure, viewModel.loginState.value)
+        assertEquals(
+            JFailure(LoginViewModel.InvalidLoginInput.Password),
+            viewModel.loginState.value
+        )
     }
 
     @Test
     fun checkIsItFailureWithFailureLogin() = runBlocking {
-        viewModel.login.value = TestHelper.failureLogin()
+        viewModel.username.value = TestHelper.failureLogin()
         viewModel.password.value = TestHelper.successPassword()
         viewModel.auth()
-        assertEquals(JobState.Failure, viewModel.loginState.value)
+        assertEquals(
+            JFailure(LoginViewModel.InvalidLoginInput.Username),
+            viewModel.loginState.value
+        )
     }
 
     @Test
     fun checkIsItFailureWithFailureLoginAndPassword() = runBlocking {
-        viewModel.login.value = TestHelper.failureLogin()
+        viewModel.username.value = TestHelper.failureLogin()
         viewModel.password.value = TestHelper.failurePassword()
         viewModel.auth()
-        assertEquals(JobState.Failure, viewModel.loginState.value)
+        assertEquals(JFailure(LoginViewModel.InvalidLoginInput.Both), viewModel.loginState.value)
+    }
+
+    private inline fun <reified T> assertLoginStateIs() {
+        assertTrue(
+            "login state is invalid ,required ${T::class.simpleName}, actual - " +
+                    "${viewModel.loginState.value!!::class.simpleName}",
+            viewModel.loginState.value is T
+        )
     }
 
 

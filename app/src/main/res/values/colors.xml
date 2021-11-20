@@ -20,8 +20,11 @@
     <color name="background">#212121</color>
     <color name="stroke">#616161</color>
     <color name="button">#625b9d</color>
+    <color name="disabled_button">#373547</color>
+    <color name="disabled_button_text">#99FFFFFF</color>
     <color name="hint">#c1c1c1</color>
     <color name="text">#FFFFFF</color>
+    <color name="error_text">#FFD4F6</color>
     <color name="smallText">#b7b7b7</color>
 
 

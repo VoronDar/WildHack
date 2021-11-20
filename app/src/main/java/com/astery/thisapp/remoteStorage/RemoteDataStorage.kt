@@ -23,14 +23,18 @@ import com.android.volley.AuthFailureError
 import com.android.volley.VolleyError
 
 import com.android.volley.RequestQueue
+import com.astery.thisapp.states.JSuccess
+import com.astery.thisapp.states.JobState
 import java.io.UnsupportedEncodingException
 
 
 class RemoteDataStorage @Inject constructor(private val retrofit: RetrofitInstance, @ApplicationContext private val context: Context) {
-    suspend fun auth(user:UserAccess){
+    suspend fun auth(user:UserAccess):JobState{
+        return JSuccess()
         Timber.d("auth $user")
         val token = retrofit.api.login(user)
         Timber.d("auth? $token")
+        return TODO("return JobState")
     }
 
 

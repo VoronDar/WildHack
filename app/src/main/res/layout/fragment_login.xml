@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
-
-        <import type="com.astery.thisapp.ui.fragments.login.JobState" />
+        <import type="com.astery.thisapp.states.JobState" />
+        <import type="com.astery.thisapp.states.JobFailureType" />
+        <import type="com.astery.thisapp.states.JobErrorType" />
+        <import type="com.astery.thisapp.ui.fragments.login.LoginViewModel.InvalidLoginInput" />
 
         <variable
             name="viewModel"
             type="com.astery.thisapp.ui.fragments.login.LoginViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:showError = "@{viewModel.loginState}"
         android:background="@color/background"
         android:overScrollMode="never"
         tools:context=".ui.activity.MainActivity">
 
         <com.google.android.material.card.MaterialCardView
             style="@style/card"
-            android:layout_gravity="center"
-            android:layout_marginBottom="60dp">
+            android:id = "@+id/auth_card"
+            app:cardElevation="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="center">
 
             <LinearLayout
                 style="@style/cardContent"
@@ -37,16 +44,19 @@
                     android:text="@string/auth"
                     android:textAlignment="center" />
 
-                <com.google.android.material.textfield.TextInputLayout style="@style/textField">
+                <com.google.android.material.textfield.TextInputLayout style="@style/textField"
+
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/login"
                         style="@style/text"
                         android:layout_width="match_parent"
                         android:hint="@string/login"
+                        app:usernameIncorrect="@{viewModel.loginState}"
                         android:inputType="textEmailAddress"
-                        android:enabled="@{viewModel.loginState == JobState.Running ? false : true}"
-                        android:text="@={viewModel.login}" />
+                        app:enabled="@{viewModel.loginState}"
+                        android:text="@={viewModel.username}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,8 +71,9 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
                         style="@style/text"
-                        android:enabled="@{viewModel.loginState == JobState.Running ? false : true}"
+                        app:enabled="@{viewModel.loginState}"
                         android:layout_width="match_parent"
+                        app:passwordIncorrect="@{viewModel.loginState}"
                         android:hint="@string/password"
                         android:inputType="textPassword"
                         android:text="@={viewModel.password}" />
@@ -73,13 +84,41 @@
                     android:id="@+id/enter"
                     style="@style/mainButton"
                     android:layout_marginTop="16dp"
-                    android:enabled="@{viewModel.loginState == JobState.Running ? false : true}"
+                    app:enabled="@{viewModel.loginState}"
                     android:onClick="@{() -> viewModel.auth()}"
                     android:text="@string/enter" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        style="@style/card"
+        android:visibility="invisible"
+        android:id = "@+id/error_card"
+        app:cardElevation="0dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/auth_card"
+        android:layout_gravity="center">
+
+    <LinearLayout
+        style="@style/cardContent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center"
+        android:padding="12dp">
+        <ImageView
+            android:layout_width="24dp"
+            android:src = "@drawable/state_warning"
+            android:layout_height="24dp"/>
+        <TextView
+            android:layout_marginLeft="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text = "@{viewModel.loginState}"
+            />
 
     </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
