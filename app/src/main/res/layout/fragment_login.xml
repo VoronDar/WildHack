@@ -1,67 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
-    android:layout_height="match_parent"
-    android:overScrollMode="never"
-    tools:context=".MainActivity">
-    <com.google.android.material.card.MaterialCardView
-        style="@style/card"
-        android:layout_gravity="center"
-        android:layout_marginBottom="60dp"
-        >
-        <LinearLayout
-            style="@style/cardContent"
-            android:padding="24dp"
-            tools:ignore="RtlHardcoded">
-        <TextView
-            style="@style/infoHighLightText"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="24dp"
-            android:text = "@string/auth"
-            />
+<layout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/textField"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/text"
-                android:layout_width="match_parent"
-                android:id = "@+id/login"
-                android:hint="@string/login"
-                android:inputType="textEmailAddress"/>
+    <data>
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <import type="com.astery.thisapp.ui.fragments.login.JobState" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/textField"
-                app:endIconDrawable="@drawable/ic_show_password"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/icon"
+        <variable
+            name="viewModel"
+            type="com.astery.thisapp.ui.fragments.login.LoginViewModel" />
+    </data>
 
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    style="@style/text"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:overScrollMode="never"
+        tools:context=".ui.activity.MainActivity">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/card"
+            android:layout_gravity="center"
+            android:layout_marginBottom="60dp">
+
+            <LinearLayout
+                style="@style/cardContent"
+                android:padding="24dp"
+                tools:ignore="RtlHardcoded">
+
+                <TextView
+                    style="@style/infoHighLightText"
                     android:layout_width="match_parent"
-                    android:id = "@+id/password"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"/>
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="@string/auth"
+                    android:textAlignment="center" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout style="@style/textField">
 
-            <Button
-                android:id = "@+id/enter"
-                style="@style/mainButton"
-                android:layout_marginTop="16dp"
-                android:text = "@string/enter"
-                />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/login"
+                        style="@style/text"
+                        android:layout_width="match_parent"
+                        android:hint="@string/login"
+                        android:inputType="textEmailAddress"
+                        android:enabled="@{viewModel.loginState == JobState.Running ? false : true}"
+                        android:text="@={viewModel.login}" />
 
-        </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textField"
+                    app:endIconDrawable="@drawable/ic_show_password"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/icon"
 
-</LinearLayout>
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password"
+                        style="@style/text"
+                        android:enabled="@{viewModel.loginState == JobState.Running ? false : true}"
+                        android:layout_width="match_parent"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:text="@={viewModel.password}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/enter"
+                    style="@style/mainButton"
+                    android:layout_marginTop="16dp"
+                    android:enabled="@{viewModel.loginState == JobState.Running ? false : true}"
+                    android:onClick="@{() -> viewModel.auth()}"
+                    android:text="@string/enter" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</layout>
