@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             _loginState.value = JRunning()
             checkForMistakes()
             if (loginState.value is JRunning)
-                _loginState.value = repository.auth(username.value!!, password.value!!)
+                _loginState.value = repository.login(username.value!!, password.value!!)
         }
     }
 

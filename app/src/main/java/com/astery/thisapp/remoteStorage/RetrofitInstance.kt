@@ -33,7 +33,7 @@ class  RetrofitInstance @Inject constructor(){
         retrofit.create(ApiService::class.java)
     }
 
-    private val BASE_URL = "http://172.16.1.5:8000/api/v2/"
+    private val BASE_URL = "http://172.16.1.10:8000/api/v2/"
 
 
 }

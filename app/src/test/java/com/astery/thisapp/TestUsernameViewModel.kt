@@ -45,21 +45,21 @@ class TestUsernameViewModel {
     fun mockRepository() {
         // return failure if at least one value is failure
         coEvery {
-            repository.auth(
+            repository.login(
                 TestHelper.failureLogin(),
                 TestHelper.successPassword()
             )
         } returns JFailure(LoginViewModel.InvalidLoginInput.Username)
 
         coEvery {
-            repository.auth(
+            repository.login(
                 TestHelper.failureLogin(),
                 TestHelper.failurePassword()
             )
         } returns JFailure(LoginViewModel.InvalidLoginInput.Both)
 
         coEvery {
-            repository.auth(
+            repository.login(
                 TestHelper.successLogin(),
                 TestHelper.failurePassword()
             )
@@ -67,7 +67,7 @@ class TestUsernameViewModel {
 
         // return success if each value is correct
         coEvery {
-            repository.auth(
+            repository.login(
                 TestHelper.successLogin(),
                 TestHelper.successPassword()
             )
