@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.astery.thisapp.ui.fragments.main.MainViewModel" />
+    </data>
 
 <com.google.android.material.card.MaterialCardView style="@style/card"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -23,7 +29,7 @@
             <TextView
                 android:id = "@+id/masks_count"
                 style="@style/smallText"
-                android:text = "123"
+                android:text = '@{viewModel.stat.masks != null ? String.valueOf(viewModel.stat.masks) : ""}'
                 />
         </LinearLayout>
 
@@ -79,3 +85,5 @@
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
+
+</layout>

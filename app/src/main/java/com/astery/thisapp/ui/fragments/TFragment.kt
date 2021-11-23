@@ -19,9 +19,4 @@ abstract class TFragment : Fragment() {
             returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
         }
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).showLogout(this.javaClass == MainFragment::class.java)
-    }
 }

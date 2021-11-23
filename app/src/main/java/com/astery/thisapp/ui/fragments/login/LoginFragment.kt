@@ -123,7 +123,7 @@ class LoginFragment : TFragment() {
         @BindingAdapter("app:showError")
         @JvmStatic
         fun setShowError(view: View?, state: JobState) {
-            if (state is JFailure || state is Error) {
+            if (state is JFailure || state is JError) {
                 val auth = view?.findViewById<View>(R.id.auth_card)!!
                 val error = view.findViewById<View>(R.id.error_card)!!
 
