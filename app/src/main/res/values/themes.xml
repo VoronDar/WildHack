@@ -22,6 +22,20 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="android:textColorHint">@color/hint</item>
+
+        <item name="colorControlNormal">@color/hint</item>
+        <item name="colorControlActivated">@color/hint</item>
+        <item name="colorControlHighlight">@color/hint</item>
+    </style>
+
+    <style name="hint" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="colorControlNormal">@color/hint</item>
+        <item name="colorControlActivated">@color/hint</item>
+        <item name="hintTextColor">@color/hint</item>
+        <item name="colorControlHighlight">@color/hint</item>
     </style>
 
 

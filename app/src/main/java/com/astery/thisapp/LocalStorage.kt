@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -13,7 +14,8 @@ class LocalStorage @Inject constructor(@ApplicationContext var context: Context)
     @Throws(ValueNotFoundException::class)
     fun getToken(now: Date): String {
         val tokenValidUntil = getPref(context).getLong(tokenValidUntilPref(), 0)
-        if (now.time < tokenValidUntil) throw ValueNotFoundException()
+
+        if (now.time > tokenValidUntil) throw ValueNotFoundException()
         return getPref(context).getString(tokenPref(), null) ?: throw ValueNotFoundException()
     }
 
@@ -27,7 +29,7 @@ class LocalStorage @Inject constructor(@ApplicationContext var context: Context)
     /** it assumes, that this function may be called only after authorisation */
     @Throws(ValueNotFoundException::class)
     fun getRefreshToken(): String {
-        return getPref(context).getString(tokenPref(), null) ?: throw ValueNotFoundException()
+        return getPref(context).getString(refreshTokenPref(), null) ?: throw ValueNotFoundException()
 
     }
 

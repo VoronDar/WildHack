@@ -1,10 +1,7 @@
 package com.astery.thisapp.remoteStorage
 
-import com.astery.thisapp.model.UserAccess
-import com.astery.thisapp.model.UserToken
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import com.astery.thisapp.model.*
+import retrofit2.http.*
 
 interface ApiService {
         @Headers("Content-Type: application/json", "accept: application/json")
@@ -12,7 +9,14 @@ interface ApiService {
         suspend fun login(@Body user:UserAccess): UserToken
 
         @Headers("Content-Type: application/json", "accept: application/json")
-        @POST("auth/login")
-        suspend fun log(@Body user:UserAccess): String
+        @POST("auth/refresh")
+        suspend fun refreshToken(@Body refreshToken: RefreshToken): UserToken
 
+        @Headers("Content-Type: application/json", "accept: application/json")
+        @GET("cams/")
+        suspend fun getCams(@Header("Authorization") token:String): List<Camera>
+
+        @Headers("Content-Type: application/json", "accept: application/json")
+        @POST("cams/{cam_id}/hls/start")
+        suspend fun getStreamUrlForCamera(@Path("cam_id") cameraId:Int, @Header("Authorization") token:String): CameraHsl
 }
